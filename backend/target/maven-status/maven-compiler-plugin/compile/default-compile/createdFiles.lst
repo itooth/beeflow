@@ -1,0 +1,15 @@
+com/beeflow/model/FlowDefinition$NodeConfig.class
+com/beeflow/model/User.class
+com/beeflow/model/Dept.class
+com/beeflow/controller/OrganApiController.class
+com/beeflow/model/Role.class
+com/beeflow/config/WebConfig$1.class
+com/beeflow/model/FlowDefinition$FlowPermission.class
+com/beeflow/BeeflowApplication.class
+com/beeflow/model/FlowDefinition$WorkFlowDef.class
+com/beeflow/controller/FlowDefinitionController.class
+com/beeflow/controller/TestController.class
+com/beeflow/config/WebConfig.class
+com/beeflow/model/ApiResponse.class
+com/beeflow/BeeflowApplication$1.class
+com/beeflow/model/FlowDefinition.class

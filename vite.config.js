@@ -81,11 +81,26 @@ export default defineConfig(({ command, mode }) => {
       host: "127.0.0.1",
       port: 5174,
       proxy: {
-        "/flow2": {
-          target: "http://49.235.72.105:8080",
+        "/organ": {
+          target: "http://localhost:8080",
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/flow2/, "/flow2"),
+          rewrite: (path) => path
         },
+        "/opentest": {
+          target: "http://localhost:8080",
+          changeOrigin: true,
+          rewrite: (path) => path
+        },
+        "/flowdefinition": {
+          target: "http://localhost:8080",
+          changeOrigin: true,
+          rewrite: (path) => path
+        },
+        "/orgApi": {
+          target: "http://localhost:8080",
+          changeOrigin: true,
+          rewrite: (path) => path
+        }
       },
     },
   };

@@ -47,27 +47,15 @@ service.interceptors.response.use(
    */
   (response) => {
     const res = response.data;
+    console.log('API Response:', res);
 
-    // if the custom code is not 1, it is judged as an error.
-    if (res.code !== 1) {
-      // 4001: Other clients logged in; 4002: Token expired; 4003: Illegal token;
-      if ([4001, 4002, 4003].includes(res.code)) {
-        if (!isAuthError.value) {
-          isAuthError.value = true;
-          Modal.error({
-            title: "鉴权失败",
-            content: "您已注销，点击右上角头像切换用户重新登录。",
-            onClose: () => (isAuthError.value = false),
-          });
-        }
-      } else {
-        Message.error({
-          content: res.msg || "请求出错",
-          duration: 5 * 1000,
-        });
-      }
-
-      return Promise.reject(new Error(res.msg || "请求出错"));
+    // Check success flag instead of code
+    if (!res.success) {
+      Message.error({
+        content: res.message || "请求出错",
+        duration: 5 * 1000,
+      });
+      return Promise.reject(new Error(res.message || "请求出错"));
     } else {
       return res;
     }
