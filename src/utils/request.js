@@ -17,18 +17,17 @@ service.interceptors.request.use(
   (config) => {
     // do something before request is sent
     const token = getToken();
+    console.log('Making request to:', config.url);  // Add URL logging
     if (token) {
       if (!config.headers) {
         config.headers = {};
       }
-      // config.headers.Authorization = `Bearer ${token}`;
       config.headers.Authorization = `${token}`;
     }
     return config;
   },
   (error) => {
-    // do something with request error
-    console.log("request", error); // for debug
+    console.log("Request error:", error); // for debug
     return Promise.reject(error);
   }
 );
@@ -47,7 +46,11 @@ service.interceptors.response.use(
    */
   (response) => {
     const res = response.data;
-    console.log('API Response:', res);
+    console.log('API Response:', {
+      url: response.config.url,
+      status: response.status,
+      data: res
+    });
 
     // Check success flag instead of code
     if (!res.success) {
@@ -61,9 +64,14 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    // console.log("err", error); // for debug
+    console.log("Response error:", {
+      url: error.config?.url,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      message: error.message
+    });
     Message.error({
-      content: error.msg || "请求出错",
+      content: error.message || "请求出错",
       duration: 5 * 1000,
     });
     return Promise.reject(error);
