@@ -1,0 +1,50 @@
+server:
+  port: 1000
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: true
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/wflow?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  flowable:
+    async-executor-activate: true
+    rest-api-enabled: false
+    idm:
+      enabled: false
+    cmmn:
+      enabled: false
+    dmn:
+      enabled: false
+    form:
+      enabled: false
+    app:
+      enabled: false
+
+logging:
+  level:
+    com.wflow: INFO
+    org.flowable: ERROR
+    org.springframework.security: ERROR
+    org.springframework.web: ERROR
+    org.apache: ERROR
+    org.mybatis: ERROR
+    org.hibernate: ERROR
+    com.zaxxer.hikari: ERROR
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.wflow.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+wflow:
+  file:
+    max-size: 20 
